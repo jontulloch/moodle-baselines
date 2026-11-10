@@ -2,7 +2,9 @@
 
 A public documentation site built with VitePress and published through GitHub Pages.
 
-Website (after publishing): https://jontulloch.github.io/moodle-baselines/
+Website: https://jontulloch.github.io/moodle-baselines/
+
+The documentation has been migrated from GitBook, including its page hierarchy, screenshots, report XML downloads and code examples. SQL and HTML template code blocks are preserved from the export; this migration does not validate their behaviour in Moodle.
 
 ## First publication
 
@@ -25,19 +27,19 @@ Only changes on `main` are published.
 
 ## Add a page
 
-1. Create a Markdown file such as `docs/guide/new-topic.md`.
+1. Create a Markdown file such as `docs/overview/new-topic.md`.
 2. Add its title and content.
 3. Add an entry to `themeConfig.sidebar` in `docs/.vitepress/config.mts`, for example:
 
 ```ts
-{ text: 'New topic', link: '/guide/new-topic' }
+{ text: 'New topic', link: '/overview/new-topic' }
 ```
 
 4. Commit both changes together. Search will include the new page when the site rebuilds.
 
 ## Add an image
 
-Upload an image to `docs/images` and reference it from a page in `docs/guide` like this:
+Upload an image to `docs/images` and reference it from a page in `docs/overview` like this:
 
 ```md
 ![A meaningful description of the screenshot](../images/example.png)
@@ -62,6 +64,14 @@ npm run docs:preview
 ## Site settings
 
 The title, navigation, sidebar and search settings are in `docs/.vitepress/config.mts`.
-The `base` value `/moodle-baselines/` matches the repository name. Change it if you rename the repository or move to a custom domain.
+The `base` value `/moodle-baselines/` matches the repository name. Change it if you rename the repository or move to a custom domain, and adjust the `/moodle-baselines/` prefix in the XML download links at the same time.
 
-The initial pages are clearly labelled examples and should be replaced with approved documentation.
+## Migrated content
+
+- `docs/index.md` is the Setup page.
+- `docs/overview/index.md` introduces the reports.
+- Each report has its own directory containing an `index.md` guide and a SQL reference page.
+- `docs/public/assets/gitbook` contains the screenshots and report XML downloads used by these pages. These files are served from `/moodle-baselines/assets/gitbook/`.
+- The sidebar follows the original GitBook table of contents. GitBook step blocks become numbered headings, hints become VitePress callouts, and reusable headings are included in the relevant pages.
+
+This is a one-time migration. Later GitBook edits are not automatically copied into this site.
